@@ -33,7 +33,7 @@ namespace AppleTestes.Droid
         }
         async void SimulateStartup()
         {
-            await Task.Delay(10);
+            await Task.Delay(1000);
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }

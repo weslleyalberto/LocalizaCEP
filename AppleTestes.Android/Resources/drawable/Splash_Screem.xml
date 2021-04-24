@@ -7,7 +7,7 @@
         
     <bitmap
             
-        android:src="@drawable/correios3_edit"
+        android:src="@drawable/mapasicon"
         android:tileMode="disabled"
         android:gravity="center"
         />

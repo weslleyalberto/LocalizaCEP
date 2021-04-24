@@ -2,50 +2,122 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppleTestes.MainPage"
-             BackgroundColor="#FFD700"
-             xmlns:ViewModel="clr-namespace:AppleTestes.VM">
+             BackgroundColor="{AppThemeBinding Light={StaticResource Key=LightColor},
+    Dark={StaticResource Black}}"
+             xmlns:ViewModel="clr-namespace:AppleTestes.VM"
+             xmlns:local="clr-namespace:AppleTestes.RenderPerson;assembly=AppleTestes">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ViewModel:MainVM x:Key="VM"/>
+            <Color x:Key="TextoBlackTheme">#FFFFFF</Color>
+            <Color x:Key="TextoLightTheme">#191970</Color>
+            <Color x:Key="CorBlackText">#FFD700</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView Orientation="Vertical" >
+   
     <StackLayout BindingContext="{StaticResource Key=VM}">
-        <Frame BackgroundColor="#FFD700" Padding="35" CornerRadius="0">
-            <Label Text="Consulta Endereço Por CEP" HorizontalTextAlignment="Center" TextColor="#191970" FontSize="20" Margin="0,30,0,0"
+        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightColor},
+            Dark={StaticResource CabecalhoBlack}}" Padding="35" CornerRadius="0">
+            <Label Text="Consulta Endereço Por CEP" HorizontalTextAlignment="Center" 
+                   TextColor="{AppThemeBinding Dark={StaticResource TextoBlackTheme},
+                Light={StaticResource TextoLightTheme}}" FontSize="20" Margin="0,30,0,0"
                    FontFamily="MyfontBold"/>
         </Frame>
-        <Image Source="CorreiosLogo" WidthRequest="{OnPlatform iOS=180, Android=180}"
+        <Image Source="MapasIcon" WidthRequest="{OnPlatform iOS=180, Android=180}"
                HorizontalOptions="Center" Margin="0,20,0,0"/>
-        <Entry Keyboard="Numeric" MaxLength="8" Margin="90,40,90,20" FontFamily="Myfont" HorizontalTextAlignment="Center"
-               Placeholder="Digite CEP" TextColor="#191970" Text="{Binding CEP}" PlaceholderColor="#696969"/>
-        <Button Text="BUSCAR" FontFamily="Myfont" Margin="150,0,150,20"
+        <local:EntryPerson Keyboard="Numeric" MaxLength="8" Margin="90,40,90,20" 
+               FontFamily="MyfontBold" HorizontalTextAlignment="Center"
+               Placeholder="Digite CEP" TextColor="#191970" Text="{Binding CEP}" 
+               PlaceholderColor="#696969" IsEnabled="{Binding EnableCampos}"/>
+        <Button Text="BUSCAR" FontFamily="Myfont" Margin="150,0,150,0"
                 BackgroundColor="#2196F3" TextColor="White"
-                CornerRadius="7" Command="{Binding BuscarEndereco}"/>
+                CornerRadius="7" Command="{Binding BuscarEndereco}"
+                IsEnabled="{Binding EnableCampos}"/>
             <Button Text="LIMPAR" FontFamily="Myfont" TextColor="White" CornerRadius="7"
-                    BackgroundColor="#2196F3" Margin="140,0,140,20" Command="{Binding BtnLimparCampo}"/>
-            <Frame Margin="30,10,30,0" CornerRadius="7" BorderColor="#191970" BackgroundColor="Transparent" IsVisible="{Binding EstaAtivo}" HorizontalOptions="CenterAndExpand">
-            <Grid>
-                <Label Text="{Binding Estado}" Grid.Row="1" TextColor="#191970" FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
-                    <Label Text="{Binding Cidade}" Grid.Row="2" TextColor="#191970" FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
-                    <Label Text="{Binding Bairro}" Grid.Row="3" TextColor="#191970" FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
-                    <Label Text="{Binding Logradouro}" Grid.Row="4" Margin="0,0,0,20" TextColor="#191970" FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
+                    BackgroundColor="#2196F3" Margin="150,0,150,10" 
+                    Command="{Binding BtnLimparCampo}"
+                    IsEnabled="{Binding EnableCampos}"/>
+            <Frame Margin="30,10,30,0" CornerRadius="7" BorderColor="{AppThemeBinding
+                 Light={StaticResource TextoLightTheme},
+                Dark={StaticResource TextoBlackTheme}}"
+                   BackgroundColor="Transparent" 
+                   IsVisible="{Binding EstaAtivo}" 
+                   HorizontalOptions="CenterAndExpand">
+              
+                <Grid>
+                <Label Text="{Binding Estado}" Grid.Row="1" 
+                       TextColor="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                    Dark={StaticResource CorBlackText}}" 
+                       FontFamily="MyfontBold" 
+                       HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Cidade}" Grid.Row="2" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                    Dark={StaticResource CorBlackText}}" FontFamily="MyfontBold" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Bairro}" Grid.Row="3" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                    Dark={StaticResource CorBlackText}}"
+                           FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Logradouro}" Grid.Row="4" Margin="0,0,0,20" 
+                           TextColor="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                    Dark={StaticResource CorBlackText}}" 
+                           FontFamily="MyfontBold" HorizontalTextAlignment="Center"/>
                 
                 <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
-                    
+                        <RowDefinition Height="50"/>
 
-                </Grid.RowDefinitions>
+
+                    </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             
         </Grid>
             </Frame>
+            <AbsoluteLayout  HorizontalOptions="Center"
+                            AbsoluteLayout.LayoutFlags="XProportional"
+                            IsVisible="{Binding AbsOnOff}" VerticalOptions="Center" 
+                            
+                             >
+            <AbsoluteLayout.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="60,0,60,0"/>
+                    <On Platform="Android" Value="30,0,30,0"/>
+                </OnPlatform>
+                
+            </AbsoluteLayout.Margin>
+            <ActivityIndicator IsRunning="{Binding EnableActivity}" 
+                               Color="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                                Dark={StaticResource CorBlackText}}" 
+                               HeightRequest="100" 
+                             BindingContext="{StaticResource Key=VM}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                 
+                                   
+                                   >
+                <ActivityIndicator.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="60,0,60,0"/>
+                        <On Platform="Android" Value="35,0,35,0"/>
+                    </OnPlatform>
+                </ActivityIndicator.Margin>
 
+            </ActivityIndicator>
+
+            <Label Text="Aguarde..." HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Margin="30,0,30,0"
+                      TextColor="{AppThemeBinding Light={StaticResource TextoLightTheme},
+                                Dark={StaticResource CorBlackText}}" 
+                       FontFamily="MyfontBold"
+                       IsVisible="{Binding EnableActivity}"/>
+        </AbsoluteLayout>
+            
 
 
 
@@ -63,5 +135,5 @@
 
 
         </StackLayout>
-    </ScrollView>
+   
 </ContentPage>

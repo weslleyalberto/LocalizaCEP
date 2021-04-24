@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>AppleTestes.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>AppleTestes.iOS</AssemblyName>
+    <AssemblyName>Consulta Cidade CEP</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <ProvisioningType>automatic</ProvisioningType>
@@ -65,6 +65,9 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Lancher.cs" />
     <Compile Include="Lancher.designer.cs">
@@ -89,6 +92,18 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\CorreiosLogo.imageset\correios32.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MapasIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MapasIcon.imageset\mapas.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MapasIcon.imageset\mapas1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MapasIcon.imageset\mapas2.png">
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -162,5 +177,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\correios2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mapas.png" />
   </ItemGroup>
 </Project>

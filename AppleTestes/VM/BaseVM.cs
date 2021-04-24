@@ -8,11 +8,11 @@ namespace AppleTestes.VM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChange([CallerMemberName]string propertyName = "")
+        protected virtual void OnPropertyChange([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        protected virtual bool SetProperty<T>(ref T storage, T value,[CallerMemberName]string propertyName = "")
+        protected virtual  bool SetProperty<T>(ref T storage, T value,[CallerMemberName]string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
             {

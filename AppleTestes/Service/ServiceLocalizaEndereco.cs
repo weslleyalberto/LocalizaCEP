@@ -1,12 +1,10 @@
 ﻿using AppleTestes.Interfaces;
 using AppleTestes.Models;
-using AppleTestes.Service;
 using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-[assembly: Xamarin.Forms.Dependency(typeof(ServiceLocalizaEndereco))]
 namespace AppleTestes.Service
 {
 
