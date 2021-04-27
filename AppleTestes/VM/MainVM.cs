@@ -49,7 +49,7 @@ namespace AppleTestes.VM
         }
 
 
-        private IServiceLocalizaEndereco<Endereco> _service;
+        
         private bool _absOnOff;
 
         public bool AbsOnOff
@@ -65,7 +65,7 @@ namespace AppleTestes.VM
 
         public MainVM()
         {
-            _service = new ServiceLocalizaEndereco();
+           
             EnableActivity = false;
 
             EnableCampos = true;
@@ -114,7 +114,7 @@ namespace AppleTestes.VM
                 }
                 else
                 {
-                    var result = await _service.BuscarEnderecoAsync(CEP);
+                    var result = await DependencyService.Get<IServiceLocalizaEndereco<Endereco>>().BuscarEnderecoAsync(CEP);
                     switch (result.Estado)
                     {
                         case null:

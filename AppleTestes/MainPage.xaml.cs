@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppleTestes.Interfaces;
+using AppleTestes.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,7 +19,12 @@ namespace AppleTestes
             InitializeComponent();
            
         }
+        protected override async void OnAppearing()
+        {
+            await DependencyService.Get<IServiceLocalizaEndereco<Endereco>>().BuscarEnderecoAsync("77600000");
+            base.OnAppearing();
+        }
 
-      
+
     }
 }

@@ -9,11 +9,11 @@ namespace AppleTestes
 {
     public partial class App : Application
     {
-        IServiceLocalizaEndereco<Endereco> _service;
+        //IServiceLocalizaEndereco<Endereco> _service;
        
         public App()
         {
-            DependencyService.Register<IServiceLocalizaEndereco<Endereco>, ServiceLocalizaEndereco>();
+           
            
             
             InitializeComponent();
@@ -23,9 +23,9 @@ namespace AppleTestes
 
         protected override async void OnStart()
         {
-          
-            _service = new ServiceLocalizaEndereco();
-          await  _service.BuscarEnderecoAsync("77600000");
+
+          // await DependencyService.Get<IServiceLocalizaEndereco<Endereco>>().BuscarEnderecoAsync("77600000");
+           
            
             
 
